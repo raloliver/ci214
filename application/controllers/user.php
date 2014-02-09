@@ -8,6 +8,26 @@
 			$this->load->model('user_model');
 		}
 
+		public function login()
+		{
+			$login = $this->input->post('login');
+			$password = $this->input->post('password');
+			
+			$result = $this->user_model->get(array(
+					'login' => $login,
+					'password' => $password
+				));
+
+			$this->output->set_content_type('application_json');
+
+			if ($result) {
+				$this->session->set_userdata(array('user_id' => $result[0]['user_id']));
+				$this->output->set_output(json_encode(array('result' => 1)));
+				return false;
+			}
+			$this->output->set_output(json_encode(array('result' => 0)));		
+		}
+
 		public function test_get()
 		{
 			$data = $this->user_model->get(2);
