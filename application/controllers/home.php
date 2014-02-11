@@ -7,28 +7,36 @@
 			$this->load->view('home/home_view');
 			$this->load->view('home/inc/footer_view');
 		}
-		public function test()
-		{
-			$this->db->select('user_id, login')
-					 ->from('user')
-					 ->order_by('user_id DESC');
 
-			$q = $this->db->get();
-			print_r($q->result());
+		// public function code()
+		// {
+			// 'password' => hash('sha256', 'custom' . VESPER)
+		// 	// $this->load->library('encrypt');
+		// 	// echo $this->encrypt->encode('Senha');*
+		// }
 
-			// $this->db->insert('user', array(
-			// 		'login' => 'raloliver'
-			// 	));
+		// public function test()
+		// {
+		// 	$this->db->select('user_id, login')
+		// 			 ->from('user')
+		// 			 ->order_by('user_id DESC');
 
-			// $this->db->where(array('user_id' => 4));
-			// $this->db->update('user', array(
-			// 		'login' => 'israel'
-			// 	));
+		// 	$q = $this->db->get();
+		// 	print_r($q->result());
 
-			// $this->db->where(array('user_id' => 4));
-			// $this->db->delete('user')
+		// 	// $this->db->insert('user', array(
+		// 	// 		'login' => 'raloliver'
+		// 	// 	));
 
-			// $this->db->delete('user', array('user_id' => 3));
+		// 	// $this->db->where(array('user_id' => 4));
+		// 	// $this->db->update('user', array(
+		// 	// 		'login' => 'israel'
+		// 	// 	));
 
-		}
+		// 	// $this->db->where(array('user_id' => 4));
+		// 	// $this->db->delete('user')
+
+		// 	// $this->db->delete('user', array('user_id' => 3));
+
+		// }
 	}

@@ -15,7 +15,7 @@
 			
 			$result = $this->user_model->get(array(
 					'login' => $login,
-					'password' => $password
+					'password' => hash('sha256', $password . VESPER)
 				));
 
 			$this->output->set_content_type('application_json');

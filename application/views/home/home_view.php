@@ -33,9 +33,9 @@
 			$.post(url, postData, function(o){
 				if (o.result == 1) {
 					window.location.href = '<?=site_url('dashboard')?>';
-					alert('Login Efetuado com Sucesso!');
+					// alert('Login Efetuado com Sucesso!');
 				} else {
-					alert('Login Inválido!');
+					alert('Login e/ou Senha Inválido!');
 				};
 			}, 'json');
 		});
