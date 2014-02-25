@@ -1,6 +1,7 @@
 <div class="row">
 	<div class="span6">
-		<form id="register_form" class="form-horizontal" method="post" action="<?=site_url('user/register')?>">
+		<div id="register_form_error" class="alert alert-error"><!-- Errors --></div>
+		<form id="register_form" class="form-horizontal" method="post" action="<?=site_url('api/register')?>">
 			<div class="control-group">
 					<label class="control-label">Usuário</label>
 					<div class="controls">
@@ -40,6 +41,8 @@
 <script>
 	$(function(){
 
+		$("#register_form_error").hide();
+
 		$("#register_form").submit(function(evt){
 			evt.preventDefault();
 			var url = $(this).attr('action');
@@ -50,7 +53,14 @@
 					window.location.href = '<?=site_url('dashboard')?>';
 					// alert('Login Efetuado com Sucesso!');
 				} else {
-					alert('Login e/ou Senha Inválido!');
+					$("#register_form_error").show();
+					var output = '<ul>';
+					for (var key in o.error){
+						var value = o.error[key];
+						output += '<li>' + value + '</li>'
+					}
+					output += '</ul>';
+					$("#register_form_error").html(output);
 				};
 			}, 'json');
 		});
