@@ -2,14 +2,25 @@
 
 	class Api extends CI_Controller
 	{
+
+		// ------------------------------------------------------------------------------
+
 		public function __construct()
 		{
-			parent::__construct();
-			// $user_id = $this->session->userdata('user_id');
-			// if (!$user_id) {
-			// 	$this->logout();
-			// }
+			parent::__construct();	
 		}
+
+		// ------------------------------------------------------------------------------
+
+		private function _require_login()
+		{
+			if ($this->session->userdata('user_id') == false) {				
+				$this->output->set_output(json_encode(array('result' => 0, 'error' => 'Você não está autorizado a ver isso!')));	
+				return false;
+			}
+		}
+
+		// ------------------------------------------------------------------------------
 
 		public function login()
 		{
@@ -31,6 +42,9 @@
 			}
 			$this->output->set_output(json_encode(array('result' => 0)));		
 		}
+
+		// ------------------------------------------------------------------------------
+
 		public function register()
 		{	
 			$this->output->set_content_type('application_json');
@@ -64,5 +78,51 @@
 			}
 
 			$this->output->set_output(json_encode(array('result' => 0, 'error' => 'Erro ao cadastrar usuário.')));		
+		}
+
+		// ------------------------------------------------------------------------------
+
+		public function create_todo()
+		{
+			$this->_require_login();
+		}
+
+		// ------------------------------------------------------------------------------
+
+		public function update_todo()
+		{
+			$this->_require_login();
+			$todo_id = $this->input->post('todo_id');
+		}
+
+		// ------------------------------------------------------------------------------
+
+		public function delete_todo()
+		{
+			$this->_require_login();
+			$todo_id = $this->input->post('todo_id');	
+		}
+
+		// ------------------------------------------------------------------------------
+
+		public function create_note()
+		{
+			$this->_require_login();
+		}
+
+		// ------------------------------------------------------------------------------
+
+		public function update_note()
+		{
+			$this->_require_login();
+			$note_id = $this->input->post('note_id');
+		}
+
+		// ------------------------------------------------------------------------------
+
+		public function delete_note()
+		{
+			$this->_require_login();
+			$note_id = $this->input->post('note_id');
 		}
 	}

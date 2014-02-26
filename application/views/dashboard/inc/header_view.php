@@ -5,8 +5,18 @@
 	<title>DIYNote</title>
 	<link rel="stylesheet" href="<?=base_url()?>public/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?=base_url()?>public/css/style.css">
-	<script scr="<?=base_url()?>public/js/bootstrap.min.js"></script>
-	<script scr="<?=base_url()?>public/js/jquery.js"></script>
+	<script src="<?=base_url()?>public/js/jquery.js"></script>
+	<script src="<?=base_url()?>public/js/bootstrap.min.js"></script>
+	<script src="<?=base_url()?>public/js/dashboard/result.js"></script>
+	<script src="<?=base_url()?>public/js/dashboard/event.js"></script>
+	<script src="<?=base_url()?>public/js/dashboard/template.js"></script>
+	<script src="<?=base_url()?>public/js/dashboard.js"></script>	
+	<script>
+	$(function() {
+		// Inicio da API Dashboard
+		var dashboard = new Dashboard();
+	});
+	</script>	
 </head>
 <body>
 	<nav class="navbar">
