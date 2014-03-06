@@ -52,6 +52,7 @@
 			$this->form_validation->set_rules('login', 'Usuário', 'required|min_length[4]|max_length[16]|is_unique[user.login]');
 			$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[user.email]');
 			$this->form_validation->set_rules('password', 'Senha', 'required|min_length[4]|max_length[16]|matches[confirm_password]');
+			$this->form_validation->set_message('matches','O campo %s não é igual ao Confirmar Senha');
 
 			if ($this->form_validation->run() == false) {
 				$this->output->set_output(json_encode(array('result' => 0, 'error' => $this->form_validation->error_array())));
@@ -82,9 +83,63 @@
 
 		// ------------------------------------------------------------------------------
 
+		public function get_todo($id = null)
+		{
+			$this->_require_login();
+
+			if ($id != null) {
+				$this->db->where(array(
+					'todo_id' => $id,
+					'user_id' => $this->session->userdata('user_id')
+				));
+			} else {
+				$this->db->where('user_id', $this->session->userdata('user_id'));
+			}
+			
+			$query 	= $this->db->get('todo');
+			$result = $query->result();
+
+			$this->output->set_output(json_encode($result));
+		}
+
+		// ------------------------------------------------------------------------------
+
 		public function create_todo()
 		{
 			$this->_require_login();
+
+			$this->form_validation->set_rules('content', 'Título', 'required|max_length[32]');
+			if ($this->form_validation->run() == false) {
+				$this->output->set_output(json_encode(array(
+					'result' => 0,
+					'error'	 => $this->form_validation->error_array()
+				)));			
+
+				return false;
+			}
+
+			$result = $this->db->insert('todo', array(
+				'content' => $this->input->post('content'),
+				'user_id' => $this->session->userdata('user_id')
+			));
+
+			if ($result) {
+
+				// Entrada mais recente para o DOM
+				$query  = $this->db->get_where('todo', array('todo_id' => $this->db->insert_id()));
+
+				$this->output->set_output(json_encode(array(
+					'result' => 1,
+					'data'	 => $query->result()
+				)));
+				return false;
+			}
+
+			$this->output->set_output(json_encode(array(
+				'result' => 0,
+				'error'	 => 'Não foi possível inserir a nota!'
+
+			)));
 		}
 
 		// ------------------------------------------------------------------------------
@@ -93,14 +148,52 @@
 		{
 			$this->_require_login();
 			$todo_id = $this->input->post('todo_id');
+			$completed = $this->input->post('completed');
+
+			$this->db->where(array('todo_id' => $todo_id));
+			$this->db->update('todo', array(
+				'completed' => $completed
+			));
+
+			$result = $this->db->affected_rows();
+			if ($result) {
+				$this->output->set_output(json_encode(array('result' => 1,)));
+				return false;
+			}
+			
+			$this->output->set_output(json_encode(array('result' => 0,)));
+			return false;
 		}
 
 		// ------------------------------------------------------------------------------
 
 		public function delete_todo()
 		{
+			$this->_require_login();			
+
+			$result = $this->db->delete('todo', array(
+				'todo_id' => $this->input->post('todo_id'),
+				'user_id' => $this->session->userdata('user_id')
+
+			));
+
+			if ($result) {
+				$this->output->set_output(json_encode(array('result' => 1,)));
+				return false;
+			}
+
+			$this->output->set_output(json_encode(array(
+				'result'  => 0,
+				'message' => 'Erro ao deletar Tarefa.'
+			)));
+
+		}
+
+		// ------------------------------------------------------------------------------
+
+		public function get_note()
+		{
 			$this->_require_login();
-			$todo_id = $this->input->post('todo_id');	
 		}
 
 		// ------------------------------------------------------------------------------

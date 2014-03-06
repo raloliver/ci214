@@ -32,3 +32,5 @@
 
 	<!-- start:wrapper -->
 	<div class="wrapper">
+		<div id="error" class="alert alert-error hide"></div>
+		<div id="success" class="alert alert-success hide"></div>

@@ -2,3 +2,7 @@
 .wrapper{width: 980px; margin: 0 auto;}
 #dashboard-side {background: #f2f2f2; min-height: 500px;}
 #dashboard-main {background: #f2f2f2; min-height: 500px;}
+
+/*geral*/
+.hide {display: none;}
+.completed_todo {color: #b3b3b3;}
