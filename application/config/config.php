@@ -1,4 +1,17 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+/*
+|--------------------------------------------------------------------------
+| Custom Autoloder Models
+|--------------------------------------------------------------------------
+*/
+function __autoload ($class)
+{
+	$class = strtolower($class);
+
+	if ($class == 'crud_model') {
+		require APPPATH . 'models/' . $class . EXT;
+	}
+}
 
 /*
 |--------------------------------------------------------------------------

@@ -6,7 +6,28 @@
 		{
 			parent::__construct();
 			$this->load->model('user_model');
-		}		
+			$result = $this->user_model->get();
+			// $result = $this->user_model->get(array(
+			// 	'login' => 'israeloliveira',
+			// 	'user_id'	=> 10
+			// 	'login !=' => 'raloliver'
+			// ));
+
+			// $result = $this->user_model->insert(array('login' => 'lucas'));
+
+			// $result = $this->user_model->delete(11);
+
+			echo '<pre>';
+			print_r($result);
+			echo '</pre>';
+
+
+		}	
+
+		public function index()
+			{
+				$this->output->enable_profiler(TRUE);
+			}	
 
 		public function test_get()
 		{
