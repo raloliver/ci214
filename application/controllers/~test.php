@@ -6,7 +6,7 @@
 		{
 			parent::__construct();
 			$this->load->model('user_model');
-			$result = $this->user_model->get();
+			// $result = $this->user_model->get();
 			// $result = $this->user_model->get(array(
 			// 	'login' => 'israeloliveira',
 			// 	'user_id'	=> 10
@@ -15,7 +15,16 @@
 
 			// $result = $this->user_model->insert(array('login' => 'lucas'));
 
-			// $result = $this->user_model->delete(11);
+			// $result = $this->user_model->delete(19);
+
+			// $result = $this->user_model->update(
+			// 	array('password' => 'poser', 'email' => 'pinho@raloliver.com', 'login' => 'pinho'),
+			// 	array('login' => 'felipe' )
+			// 	);
+
+			$result = $this->user_model->insertUpdate(array(
+				'login' => 'felipe'
+				), 17);
 
 			echo '<pre>';
 			print_r($result);

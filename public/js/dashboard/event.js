@@ -99,7 +99,7 @@ var Event = function() {
                     Result.success('Tarefa deletada!');
                     self.remove();
                 } else {
-                    Result.error(o.msg);
+                    // Result.error(o.msg);
                 }
             }, 'json');
         })

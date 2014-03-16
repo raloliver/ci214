@@ -7,7 +7,10 @@
 
 		public function __construct()
 		{
-			parent::__construct();	
+			parent::__construct();
+			$this->load->model('user_model');	
+			$this->load->model('todo_model');
+			$this->load->model('note_model');
 		}
 
 		// ------------------------------------------------------------------------------
@@ -27,7 +30,6 @@
 			$login = $this->input->post('login');
 			$password = $this->input->post('password');
 			
-			$this->load->model('user_model');
 			$result = $this->user_model->get(array(
 					'login' => $login,
 					'password' => hash('sha256', $password . VESPER)
@@ -64,8 +66,7 @@
 			$email = $this->input->post('email');
 			$password = $this->input->post('password');
 			$confirm_password = $this->input->post('confirm_password');
-
-			$this->load->model('user_model');
+			
 			$user_id = $this->user_model->insert(array(
 				'login' => $login,
 				'password' => hash('sha256', $password . VESPER),
@@ -88,17 +89,16 @@
 			$this->_require_login();
 
 			if ($id != null) {
-				$this->db->where(array(
+				$result = $this->todo_model->get(array(
 					'todo_id' => $id,
-					'user_id' => $this->session->userdata('user_id')
-				));
+					'user_id' => $this->session->userdata('user_id')		
+				));				
 			} else {
-				$this->db->where('user_id', $this->session->userdata('user_id'));
+				$result = $this->todo_model->get(array(
+					'user_id' => $this->session->userdata('user_id')
+				));				
 			}
 			
-			$query 	= $this->db->get('todo');
-			$result = $query->result();
-
 			$this->output->set_output(json_encode($result));
 		}
 
@@ -118,19 +118,18 @@
 				return false;
 			}
 
-			$result = $this->db->insert('todo', array(
+			$result = $this->todo_model->insert(array(
 				'content' => $this->input->post('content'),
 				'user_id' => $this->session->userdata('user_id')
 			));
 
 			if ($result) {
 
-				// Entrada mais recente para o DOM
-				$query  = $this->db->get_where('todo', array('todo_id' => $this->db->insert_id()));
+				// Entrada mais recente para o DOM	
 
 				$this->output->set_output(json_encode(array(
 					'result' => 1,
-					'data'	 => $query->result()
+					'data'	 => $result
 				)));
 				return false;
 			}
@@ -150,12 +149,10 @@
 			$todo_id = $this->input->post('todo_id');
 			$completed = $this->input->post('completed');
 
-			$this->db->where(array('todo_id' => $todo_id));
-			$this->db->update('todo', array(
+			$result = $this->todo_model->update(array(
 				'completed' => $completed
-			));
+			), $todo_id);
 
-			$result = $this->db->affected_rows();
 			if ($result) {
 				$this->output->set_output(json_encode(array('result' => 1,)));
 				return false;
@@ -171,7 +168,7 @@
 		{
 			$this->_require_login();			
 
-			$result = $this->db->delete('todo', array(
+			$result = $this->todo_model->delete(array(
 				'todo_id' => $this->input->post('todo_id'),
 				'user_id' => $this->session->userdata('user_id')
 
