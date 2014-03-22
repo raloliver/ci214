@@ -17,6 +17,7 @@
 	// ------------------------------------------------------------------------------
 
 	// ALL: $this->user_model->get(); SINGLE: // $this->user_model->get(2); CUSTOM: // $this->user_model->get(array('age' => '28', 'gender' => 'male'))
+
 	public function get($id = null, $order_by = null)
 	{	
 
@@ -81,7 +82,7 @@
 		$q = $this->db->get($this->_table);
 		$result = $q->num_rows();
 
-		if ($result = 0) {
+		if ($result == 0) {
 			// INSERT
 			return $this->insert($data);
 		}

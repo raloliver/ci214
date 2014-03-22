@@ -22,7 +22,7 @@
             
             <div class="clearfix"></div>
             
-            <textarea tabindex="2" name="content"></textarea>
+            <textarea tabindex="2" name="content" placeholder="Conteúdo do Lembrete"></textarea>
             
         </form>
         
