@@ -82,11 +82,11 @@ var Event = function() {
                 if (o.result == 1) {
                     Result.success(o.success);
                     if (postData.completed == 1) {
-                        self.parent('div').addClass('completed_todo');
+                        $('#todo_' + postData.todo_id).addClass('completed_todo');
                         self.html('<i class="icon-retweet"></i>');
                         self.attr('data-completed', 0);
                     } else {
-                        self.parent('div').removeClass('completed_todo');
+                        $('#todo_' + postData.todo_id).removeClass('completed_todo');
                         self.html('<i class="icon-ok"></i>');
                         self.attr('data-completed', 1);
                     }               
@@ -161,7 +161,7 @@ var Event = function() {
             var c = confirm('Deseja realmente deletar esta tarefa?')
             if (c == false) return false;
 
-            var self = $(this).parent('div');
+            var self = $(this).parents('div:eq(0)');
             var url = $(this).attr('href');
             var postData = {
                 'todo_id': $(this).attr('data-id')
@@ -186,7 +186,7 @@ var Event = function() {
             var c = confirm('Deseja realmente deletar este lembrete?')
             if (c == false) return false;
 
-            var self = $(this).parent('div');
+            var self = $(this).parents('div:eq(0)');
             var url = $(this).attr('href');
             var postData = {
                 'note_id': $(this).attr('data-id')

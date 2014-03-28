@@ -1,7 +1,8 @@
 <div class="row">
-	<div class="span6">
+	<div class="span6 offset2">
 		<div id="register_form_error" class="alert alert-error"><!-- Errors --></div>
 		<form id="register_form" class="form-horizontal" method="post" action="<?=site_url('api/register')?>">
+			<h3 class="text-right">Cadastro</h3>
 			<div class="control-group">
 					<label class="control-label">Usuário</label>
 					<div class="controls">
@@ -30,12 +31,10 @@
 			<div class="control-group">
 					<div class="controls">
 						<input type="submit" class="btn btn-primary" value="Cadastrar">
+						<a class="btn" href="<?=site_url('/')?>">Cancelar</a>						
 					</div>
 			</div>
 		</form>
-
-	<a href="<?=site_url('/')?>">Voltar</a>
-
 	</div>
 </div>
 <script>

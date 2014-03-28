@@ -9,9 +9,11 @@
 	<script src="<?=base_url()?>public/third-party/js/jquery.js"></script>
 </head>
 <body>
-	<header>
-		DIYEDU
-	</header>
+	<div id="header">
+		<div class="container">
+			<h3>DIYNotes</h3>
+		</div>
+	</div>
 
-	<!-- start:wrapper -->
-	<div class="wrapper">
+	<!-- start:container -->
+	<div class="container">

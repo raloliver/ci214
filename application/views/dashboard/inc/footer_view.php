@@ -1,9 +1,11 @@
 </div>
-<!-- end:wrapper -->
+<!-- end:container -->
 
-<footer>
-	&copy <?=date('Y')?>
-</footer>
+<div id="footer">
+	<div class="container">
+		&copy <?=date('Y')?>
+	</div>
+</div>
 
 </body>
 </html>

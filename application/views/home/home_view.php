@@ -1,6 +1,7 @@
 <div class="row">
-	<div class="span6">
+	<div class="span6 offset2">
 		<form id="login_form" class="form-horizontal" method="post" action="<?=site_url('api/login')?>">
+			<h3 class="text-right">Login</h3>
 			<div class="control-group">
 					<label class="control-label">Usuário</label>
 					<div class="controls">
@@ -17,12 +18,10 @@
 			<div class="control-group">
 					<div class="controls">
 						<input type="submit" class="btn btn-primary" value="Entrar">
+						<a class="btn" href="<?=site_url('home/register')?>">Cadastrar</a>
 					</div>
 			</div>
 		</form>
-
-	<a href="<?=site_url('home/register')?>">Cadastrar</a>
-
 	</div>
 </div>
 <script>

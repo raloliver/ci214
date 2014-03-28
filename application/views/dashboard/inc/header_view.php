@@ -1,4 +1,4 @@
-	<!doctype html>
+		<!doctype html>
 <html lang="pt-br">
 <head>
 	<meta charset="UTF-8">
@@ -19,18 +19,22 @@
 	</script>	
 </head>
 <body>
-	<nav class="navbar">
+	<div class="navbar">
 		<div class="navbar-inner">
-			<span class="brand">DIYNote</span>
-			<ul class="nav">
-				<li><a href="#">Painel</a></li>
-				<li><a href="#">Perfil</a></li>
-				<li><a href="<?=site_url('dashboard/logout') ?>">Sair</a></li>
-			</ul>
+			<div class="container">
+				<span class="brand">DIYNote</span>
+				<ul class="nav">
+					<li><a href="#">Painel</a></li>
+					<li><a href="#">Perfil</a></li>					
+				</ul>
+				<div class="pull-right">
+					<a class="btn" href="<?=site_url('dashboard/logout') ?>">Sair</a>
+				</div>
+			</div>
 		</div>	
-	</nav>
+	</div>
 
-	<!-- start:wrapper -->
-	<div class="wrapper">
+	<!-- start:container -->
+	<div class="container">
 		<div id="error" class="alert alert-error hide"></div>
 		<div id="success" class="alert alert-success hide"></div>
